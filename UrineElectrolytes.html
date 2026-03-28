@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urinary Electrolytes & Osmolality — Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f7f4ef;
+    --cream: #ede8df;
+    --accent: #b5451b;
+    --accent2: #2c6e8a;
+    --gold: #c89b3c;
+    --soft: #e8e2d8;
+    --muted: #6b6460;
+    --green: #2d6a4f;
+    --green-light: #eaf4ef;
+    --red-light: #fdf0ec;
+    --blue-light: #eaf2f7;
+    --yellow-light: #fdf8ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border: 40px solid rgba(200,155,60,0.15);
+    border-radius: 50%;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 200px;
+    width: 200px; height: 200px;
+    border: 2px solid rgba(200,155,60,0.2);
+    border-radius: 50%;
+  }
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--gold); }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(247,244,239,0.6);
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(247,244,239,0.55);
+    letter-spacing: 0.06em;
+  }
+  .meta-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--cream);
+    border-bottom: 2px solid var(--soft);
+    padding: 0 48px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* LAYOUT */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+
+  /* CHAPTER SUMMARY BANNER */
+  .summary-banner {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 36px 40px;
+    margin-bottom: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .summary-banner::before {
+    content: '❝';
+    position: absolute;
+    top: -10px; right: 24px;
+    font-size: 120px;
+    color: rgba(200,155,60,0.12);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .summary-banner .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .summary-banner p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(247,244,239,0.88);
+  }
+  .summary-banner p + p { margin-top: 12px; }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 64px;
+    scroll-margin-top: 56px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--soft);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 28px 0 12px;
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* KEY POINTS BOX */
+  .keypoints {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+  }
+  .keypoints .kp-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .keypoints ul { list-style: none; }
+  .keypoints li {
+    padding: 7px 0 7px 20px;
+    position: relative;
+    font-size: 14px;
+    color: rgba(247,244,239,0.88);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    line-height: 1.65;
+  }
+  .keypoints li:last-child { border-bottom: none; }
+  .keypoints li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  /* TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0 28px;
+    border: 1px solid var(--soft);
+    border-radius: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead tr {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: var(--cream); }
+  tbody tr:nth-child(odd) { background: white; }
+  tbody td {
+    padding: 11px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--soft);
+    line-height: 1.6;
+  }
+  tbody td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* FORMULA BOX */
+  .formula-box {
+    background: var(--cream);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 24px;
+    margin: 20px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .formula-box .formula-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .formula-box .formula-eq {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .formula-box .formula-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+  }
+
+  /* PEARL */
+  .pearl {
+    background: var(--yellow-light);
+    border: 1px solid #e8d88a;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .pearl .pearl-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  /* ALERT */
+  .alert {
+    background: var(--red-light);
+    border: 1px solid #e8b4a0;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .alert .alert-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  /* TWO-COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .col-card {
+    border: 1px solid var(--soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .col-card .col-head {
+    background: var(--accent2);
+    color: white;
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .col-card.red .col-head { background: var(--accent); }
+  .col-card .col-body {
+    padding: 14px 16px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    background: white;
+  }
+  .col-card .col-body ul { padding-left: 18px; }
+  .col-card .col-body li { margin-bottom: 5px; }
+
+  /* LIMITATIONS */
+  .limit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  @media (max-width: 600px) { .limit-grid { grid-template-columns: 1fr; } }
+  .limit-card {
+    background: white;
+    border: 1px solid var(--soft);
+    border-top: 3px solid var(--accent2);
+    border-radius: 0 0 4px 4px;
+    padding: 18px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .limit-card strong {
+    display: block;
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* SUMMARY TABLE full-width reference */
+  .ref-table thead th { background: #1a1a2e; }
+  .val-low { color: var(--green); font-weight: 600; }
+  .val-high { color: var(--accent); font-weight: 600; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(247,244,239,0.45);
+    padding: 28px 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 12px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.4s ease both; }
+  .section:nth-child(2) { animation-delay: 0.05s; }
+  .section:nth-child(3) { animation-delay: 0.1s; }
+  .section:nth-child(4) { animation-delay: 0.15s; }
+  .section:nth-child(5) { animation-delay: 0.2s; }
+  .section:nth-child(6) { animation-delay: 0.25s; }
+  .section:nth-child(7) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Vet Clin Small Anim 56 (2026) · Philp & Hopper</div>
+  <h1>Urinary Electrolytes<br><span>&</span> Osmolality</h1>
+  <div class="header-sub">Chapter Summary & Study Guide · Small Animal Critical Care</div>
+  <div class="header-meta">
+    <div class="meta-item"><div class="meta-dot"></div>Urine Sodium & Osmolality</div>
+    <div class="meta-item"><div class="meta-dot"></div>Urine Chloride</div>
+    <div class="meta-item"><div class="meta-dot"></div>Urine Potassium</div>
+    <div class="meta-item"><div class="meta-dot"></div>Urine Anion Gap</div>
+    <div class="meta-item"><div class="meta-dot"></div>Mg · Ca · Limitations</div>
+  </div>
+</header>
+
+<nav>
+  <a href="#summary">Summary</a>
+  <a href="#sodium">Na⁺ & Osm</a>
+  <a href="#chloride">Cl⁻</a>
+  <a href="#potassium">K⁺</a>
+  <a href="#uag">Anion Gap</a>
+  <a href="#misc">Mg · Ca</a>
+  <a href="#limits">Limitations</a>
+  <a href="#reference">Reference</a>
+</nav>
+
+<main>
+
+  <!-- CHAPTER SUMMARY -->
+  <div class="summary-banner" id="summary">
+    <div class="label">Chapter Summary</div>
+    <p>Urine electrolytes allow clinicians to assess whether the <strong style="color:var(--gold)">kidney's response to an electrolyte or acid-base disturbance is appropriate</strong>. The key principle: interpret the renal response in the context of the clinical abnormality — not in isolation.</p>
+    <p>Urine sodium and osmolality reflect RAAS and ADH activity respectively, aiding volume status assessment and dysnatremia evaluation. Urine chloride differentiates causes of metabolic alkalosis. The urine anion gap estimates ammonium excretion in metabolic acidosis. Urine potassium, calcium, and magnesium help evaluate dyskalemia, urolithiasis, and hypomagnesemia.</p>
+    <p>All results must be interpreted alongside <strong style="color:var(--gold)">history, physical examination, concurrent medications, and other laboratory data</strong>. Many cutoffs derive from human medicine and may not translate directly to small animals.</p>
+  </div>
+
+  <div class="keypoints">
+    <div class="kp-title">Key Points from the Chapter</div>
+    <ul>
+      <li>Urine electrolytes are best interpreted by evaluation of the renal response to a specific abnormality</li>
+      <li>Urine sodium and osmolality are helpful in assessment of volume status and evaluation of dysnatremia</li>
+      <li>Urine chloride may aid in differentiation of causes of metabolic alkalosis; urine anion gap may be useful in metabolic acidosis</li>
+      <li>Urine potassium, calcium, and magnesium can be helpful in evaluating dyskalemia, calcium-based urolithiasis, and hypomagnesemia</li>
+      <li>Useful interpretation requires incorporation of history, physical examination, and other laboratory data alongside knowledge of limitations</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1: SODIUM & OSMOLALITY -->
+  <div class="section" id="sodium">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title">Urine Sodium & Osmolality</div>
+    </div>
+
+    <p>The kidneys maintain total body fluid volume and osmolality as part of normal homeostasis. <strong>Extracellular fluid volume is determined by total body sodium content</strong>, while osmolality is determined by water content.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-head">U[Na⁺] → RAAS Activity</div>
+        <div class="col-body">
+          <ul>
+            <li><strong>&lt; 20 mEq/L</strong> → RAAS activated; decreased ECV</li>
+            <li><strong>&gt; 40 mEq/L</strong> → RAAS not active; fluid replete (assumes normal renal function)</li>
+            <li>20–40 mEq/L: gray zone; some human sources use 30–40 as low cutoff</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-card red">
+        <div class="col-head">Urine Osmolality → ADH Activity</div>
+        <div class="col-body">
+          <ul>
+            <li><strong>&gt; 200 mOsm/kg</strong> → ADH is active</li>
+            <li>Dogs: 369–2416 mOsm/kg</li>
+            <li>Cats: up to 3000 mOsm/kg</li>
+            <li>Estimate in dogs: last 2 digits of USG × 36</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>Fractional Excretion of Sodium (FENa)</h3>
+    <p>FENa removes the influence of urine concentration by indexing urine sodium to urine creatinine (excreted at a nearly constant rate). Used to differentiate prerenal from renal AKI.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-eq">FENa = (U[Na⁺] × Blood Cr) ÷ (Blood [Na⁺] × Urine Cr) × 100</div>
+      <div class="formula-note">FENa &lt; 1% → kidneys retaining Na⁺ (prerenal / early AKI) · FENa &gt; 2% → tubular damage, established renal AKI</div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">Important Caveat</div>
+      Diuretics artificially raise FENa even in hypovolemic patients. In diuretic-treated patients, <strong>FEUrea</strong> (cutoff &lt; 40% transient, &gt; 40% established AKI) may be a better alternative — though not yet validated in small animals.
+    </div>
+
+    <h3>Electrolyte-Free Water Clearance (EFWC)</h3>
+    <p>Used to assess whether the kidney is retaining or excreting free water — key in evaluating dysnatremia.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-eq">EFWC = Urine volume × [ 1 − (U[Na⁺] + U[K⁺]) ÷ Blood [Na⁺] ]</div>
+      <div class="formula-note">Positive = excreting free water · Negative = retaining free water · Note: glucosuria invalidates this formula</div>
+    </div>
+
+    <div class="pearl">
+      <div class="pearl-label">Clinical Pearl</div>
+      Comparing the ratio of plasma [Na⁺] to combined U[Na⁺] + U[K⁺] is a simple way to judge whether the kidney is retaining or excreting free water. This is more reliable than urine osmolality alone in most circumstances.
+    </div>
+
+    <h3>Causes of Low U[Na⁺] Without True Hypovolemia</h3>
+    <p>Decreased ECV with RAAS activation (and non-osmotic ADH release) also occurs in <strong>heart failure</strong> and <strong>hypoalbuminemia</strong>, despite normal or elevated total body water. A low U[Na⁺] may also be found in normovolemic polyuric patients where dilution reduces sodium concentration even when sodium content is appropriate.</p>
+  </div>
+
+  <!-- SECTION 2: CHLORIDE -->
+  <div class="section" id="chloride">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title">Urine Chloride</div>
+    </div>
+
+    <p>The majority of filtered chloride is reabsorbed in the proximal tubule alongside water, with further reabsorption in the loop of Henle and distal nephron. Chloride has a <strong>reciprocal relationship with bicarbonate</strong> — chloride depletion leads to a compensatory rise in bicarbonate, causing metabolic alkalosis.</p>
+
+    <h3>When to Use It</h3>
+    <p>Urine chloride is most useful in the <strong>evaluation of metabolic alkalosis</strong> — specifically to distinguish chloride-responsive from chloride-resistant causes.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>U[Cl⁻]</th>
+            <th>Classification</th>
+            <th>Common Causes</th>
+            <th>Treatment Principle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&lt; 25 mEq/L</td>
+            <td>Chloride-responsive</td>
+            <td>Vomiting (HCl loss), historical diuretic use, GI suctioning</td>
+            <td>Administer chloride (0.9% NaCl); alkalosis resolves</td>
+          </tr>
+          <tr>
+            <td>&gt; 40 mEq/L</td>
+            <td>Chloride-resistant</td>
+            <td>Primary/secondary hyperaldosteronism, salt-wasting tubular disorders, severe hypokalemia, current diuretic use</td>
+            <td>Treat underlying cause; saline alone will not resolve</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pearl">
+      <div class="pearl-label">Small Animal Note</div>
+      Urine chloride calculations may be less useful in small animal medicine because causes like surreptitious vomiting or diuretic use (classic human scenarios) are less common in our patients. Still important to know for board examinations.
+    </div>
+  </div>
+
+  <!-- SECTION 3: POTASSIUM -->
+  <div class="section" id="potassium">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title">Urine Potassium</div>
+    </div>
+
+    <p>Potassium is freely filtered through the glomerulus; ~90% is reabsorbed in the proximal tubule and thick ascending limb. The <strong>distal nephron is where regulated secretion or reabsorption occurs</strong>, largely under aldosterone control. Multiple methods exist for evaluating urinary potassium.</p>
+
+    <h3>Four Evaluation Methods Compared</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Method</th><th>Formula</th><th>Hypokalemia Thresholds</th><th>Hyperkalemia Thresholds</th><th>Key Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Spot U[K⁺]</td>
+            <td>Direct measurement</td>
+            <td>&lt;15 = extrarenal · &gt;40 = renal wasting</td>
+            <td>—</td>
+            <td>Simple but unreliable; doesn't account for water reabsorption</td>
+          </tr>
+          <tr>
+            <td>FEK</td>
+            <td>(U[K⁺] × PCr) ÷ (P[K⁺] × UCr) × 100</td>
+            <td>&lt;4–6% = nonrenal · &gt;6% = renal loss</td>
+            <td>—</td>
+            <td>Varies with GFR; useful in AKI monitoring</td>
+          </tr>
+          <tr>
+            <td>TTKG</td>
+            <td>(U[K⁺] × Plasma Osm) ÷ (P[K⁺] × Urine Osm)</td>
+            <td>&lt;3 = extrarenal · &gt;3 = renal</td>
+            <td>&lt;7 = ↓ renal excretion · &gt;7 = extrarenal</td>
+            <td>Requires U[Na⁺] &gt;25 AND Uosm ≥ Plasma Osm. Physiologic assumptions questioned</td>
+          </tr>
+          <tr>
+            <td>UK:UCr</td>
+            <td>U[K⁺] ÷ UCr (mmol/L) — see formula box for mg/dL conversion</td>
+            <td>&lt;2.5 = nonrenal · &gt;2.5 = renal wasting</td>
+            <td>&lt;10 = inappropriate · &gt;20 = appropriate/extrarenal</td>
+            <td>Preferred over TTKG; no restrictive assumptions; applies regardless of U[Na⁺] or osmolality</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">UK:UCr Conversion (when creatinine in mg/dL)</div>
+      <div class="formula-eq">UK:UCr = U[K⁺] × 1000 ÷ (Urine Cr [mg/dL] × 88)</div>
+      <div class="formula-note">Use same reference ranges regardless of which unit conversion is applied · Creatinine usually measured in mmol/L (not μmol/L) in SI units</div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">TTKG Prerequisites</div>
+      TTKG is only valid when: (1) U[Na⁺] &gt; 25 mEq/L — ensures sodium delivery to principal cells is not rate-limiting for K⁺ secretion, AND (2) Urine osmolality ≥ Plasma osmolality — active ADH required for optimal K⁺ secretion. If either condition fails, use UK:UCr instead.
+    </div>
+
+    <h3>Evaluating Hypokalemia — Key Differential Logic</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-head">Extrarenal Loss (U[K⁺] &lt; 15, FEK &lt; 4–6%)</div>
+        <div class="col-body">
+          <ul>
+            <li>GI loss (vomiting, diarrhea)</li>
+            <li>Third space loss</li>
+            <li>Cutaneous loss (rare)</li>
+            <li>Intracellular translocation (alkalosis, insulin)</li>
+            <li>Pseudohypokalemia</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-card red">
+        <div class="col-head">Renal Loss — then check U[Na⁺]</div>
+        <div class="col-body">
+          <strong>U[Na⁺] &lt; 20:</strong>
+          <ul>
+            <li>Primary hyperaldosteronism</li>
+            <li>Primary tubular defect</li>
+            <li>Hyperadrenocorticism</li>
+            <li>Amphotericin B</li>
+          </ul>
+          <strong>U[Na⁺] &gt; 40:</strong>
+          <ul>
+            <li>Intrinsic renal injury, RTA</li>
+            <li>Drugs (diuretics, penicillins)</li>
+            <li>Hypomagnesemia</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>Evaluating Hyperkalemia — Key Causes of Decreased Renal Excretion (TTKG &lt; 7)</h3>
+    <p>When TTKG &lt; 7 or UK:UCr &lt; 10 in a hyperkalemic patient, decreased renal potassium excretion is implicated. Main causes include: <strong>decreased aldosterone secretion</strong> (hypoadrenocorticism), <strong>decreased response to aldosterone</strong>, <strong>decreased delivery of sodium and water to distal tubule</strong>, <strong>kidney disease</strong>, and <strong>post-renal causes</strong> (urethral/ureteral obstruction, uroabdomen).</p>
+
+    <div class="pearl">
+      <div class="pearl-label">AKI Monitoring Pearl</div>
+      The combined use of FENa and FEK may be informative: <strong>decreasing FENa + increasing FEK</strong> suggests RAAS activation, indicating renal stress and risk of AKI development. FEK increases during AKI onset and decreases on recovery, making it useful for serial monitoring.
+    </div>
+  </div>
+
+  <!-- SECTION 4: URINE ANION GAP -->
+  <div class="section" id="uag">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title">Urine Anion Gap (UAG)</div>
+    </div>
+
+    <p>The UAG is the primary tool for evaluating <strong>hyperchloremic (non-anion gap) metabolic acidosis</strong>. It serves as a rough estimate of urinary ammonium (NH₄⁺) concentration — the kidney's main mechanism for excreting excess acid.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-eq">UAG = U[Na⁺] + U[K⁺] − U[Cl⁻]</div>
+      <div class="formula-note">Urine bicarbonate is excluded because it is present in only very small amounts at urine pH &lt; 6.6</div>
+    </div>
+
+    <h3>Interpretation Logic</h3>
+    <p>In metabolic acidosis, kidneys should increase NH₄⁺ excretion. NH₄⁺ is excreted alongside Cl⁻, raising U[Cl⁻] and making the UAG <strong>more negative</strong>. If the kidney cannot secrete H⁺ (distal RTA), NH₄⁺ cannot increase → UAG stays <strong>positive</strong>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>UAG Value</th><th>NH₄⁺ Excretion</th><th>Renal Response</th><th>Diagnoses to Consider</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Negative (−20 to −50)</td>
+            <td>Appropriately increased</td>
+            <td>Normal — kidney is working</td>
+            <td>GI HCO₃⁻ loss (diarrhea), dilutional acidosis — extrarenal cause</td>
+          </tr>
+          <tr>
+            <td>Positive or near zero</td>
+            <td>Inappropriately low</td>
+            <td>Abnormal — kidney is failing to excrete acid</td>
+            <td>Distal (Type 1) RTA, Type 4 RTA (hyperkalemia + acidosis), generalized kidney disease</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">Key Limitations of UAG</div>
+      UAG assumes NH₄⁺ is excreted with Cl⁻ — this is invalid if urine contains <strong>ketones</strong> (DKA → false-positive UAG mimicking RTA), <strong>bicarbonate</strong>, or other anionic compounds. Also unreliable in generalized kidney disease. Dietary variation adds further inter-individual variability.
+    </div>
+
+    <div class="pearl">
+      <div class="pearl-label">RTA Diagnostic Clue</div>
+      Failure to acidify urine below pH 6.0 in the face of systemic metabolic acidosis should raise suspicion for distal (Type 1) RTA — even without a formal UAG calculation — provided urinary tract infection with urease-producing organisms has been excluded.
+    </div>
+  </div>
+
+  <!-- SECTION 5: MISC ELECTROLYTES -->
+  <div class="section" id="misc">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title">Miscellaneous: Mg²⁺ & Ca²⁺</div>
+    </div>
+
+    <h3>Urine Magnesium (FEMg)</h3>
+    <p>The kidney reabsorbs approximately <strong>95% of filtered magnesium</strong>. A FEMg of ~1% has been demonstrated in healthy dogs. FEMg is used to determine whether hypomagnesemia is of renal or extrarenal origin.</p>
+
+    <div class="formula-box">
+      <div class="formula-label">FEMg Formula</div>
+      <div class="formula-eq">FEMg = 100 × (U[Mg²⁺] × Blood Cr) ÷ (0.7 × Blood [Mg²⁺] × Urine Cr)</div>
+      <div class="formula-note">The 0.7 factor accounts for ~70% of serum magnesium being unbound and available for glomerular filtration · Values based on total (not ionized) magnesium</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>FEMg</th><th>Interpretation</th><th>Causes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>&lt; 2%</td>
+            <td>Extrarenal loss — kidney appropriately conserving Mg²⁺</td>
+            <td>GI loss, decreased intake, translocation, redistribution</td>
+          </tr>
+          <tr>
+            <td>&gt; 2–4%</td>
+            <td>Renal wasting — kidney inappropriately losing Mg²⁺</td>
+            <td>Loop diuretics, aminoglycosides, cisplatin, CKD, hypercalcemia</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Urine Calcium (FECa)</h3>
+    <p>FECa = (U[Ca²⁺] × Blood Cr) ÷ (Blood [Ca²⁺] × Urine Cr) × 100</p>
+    <p>Hypercalciuria is considered important in calcium oxalate urolithiasis pathogenesis. Higher urine Ca:Cr ratios have been reported in predisposed dog breeds (e.g., miniature schnauzers), though substantial overlap with unaffected dogs limits clinical utility. <strong>Hydrochlorothiazide</strong> promotes calcium uptake in the thick ascending limb, decreasing urinary calcium — efficacy can be monitored with serial U[Ca²⁺] measurements.</p>
+
+    <div class="pearl">
+      <div class="pearl-label">Urine Mg:Cr</div>
+      Spot urine magnesium-to-creatinine ratios correlate reasonably well with 24-hour urine Mg²⁺ concentrations in people, making them a practical alternative to timed collections.
+    </div>
+  </div>
+
+  <!-- SECTION 6: LIMITATIONS -->
+  <div class="section" id="limits">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title">Limitations to Know</div>
+    </div>
+
+    <div class="limit-grid">
+      <div class="limit-card">
+        <strong>Human-Derived Cutoffs</strong>
+        Many threshold values (FENa 1–2%, FEK 4–6%, UK:UCr 2.5) originate from human medicine. Direct extrapolation to dogs and cats may not be valid and has not been fully validated.
+      </div>
+      <div class="limit-card">
+        <strong>Spot Sample Variability</strong>
+        Single-timepoint measurements may not correlate well with 24-hour excretion. Fractional excretion indices partially correct for concentration effects, but 24-hour collections remain the gold standard.
+      </div>
+      <div class="limit-card">
+        <strong>Diuretic Interference</strong>
+        Diuretics raise U[Na⁺] and FENa even in hypovolemic patients by blocking renal sodium reabsorption. FEUrea is a better alternative in these patients, though not yet validated in small animals.
+      </div>
+      <div class="limit-card">
+        <strong>TTKG Assumptions</strong>
+        Requires U[Na⁺] &gt; 25 mEq/L AND Uosm ≥ Plasma Osm. If either fails, TTKG is invalid. UK:UCr is now preferred as it lacks these restrictions.
+      </div>
+      <div class="limit-card">
+        <strong>FENa in AKI</strong>
+        Many AKI patients with intrinsic renal injury still have FENa &lt; 1%. Behavior of urine electrolytes differs little between transient and persistent AKI, limiting therapeutic and prognostic relevance.
+      </div>
+      <div class="limit-card">
+        <strong>Point-of-Care Accuracy</strong>
+        Discrepancy between central lab and bedside analyzers for U[K⁺] averaged ~19.7 mmol/L in one human study. U[K⁺] often exceeds analyzer upper range; samples must be diluted. Consult manufacturer for correction factors.
+      </div>
+      <div class="limit-card">
+        <strong>Sample Handling</strong>
+        Urine electrolytes are stable for up to 48 hours at various temperatures; osmolality may change sooner. Note storage time when submitting to external laboratories.
+      </div>
+      <div class="limit-card">
+        <strong>IV Fluids & Medications</strong>
+        Active IV fluid therapy alters sodium excretion, tubular flow rate, and urine electrolyte concentrations. Always document concurrent therapies when interpreting results.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: REFERENCE TABLE -->
+  <div class="section" id="reference">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title">Complete Reference Table</div>
+    </div>
+    <p>All formulae, interpretive thresholds, and clinical notes in one place.</p>
+
+    <div class="table-wrap">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Formula</th>
+            <th>Low → Indicates</th>
+            <th>High → Indicates</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>U[Na⁺]</td>
+            <td>Direct spot measurement</td>
+            <td><span class="val-low">&lt;20 mEq/L</span><br>RAAS active, ↓ ECV</td>
+            <td><span class="val-high">&gt;40 mEq/L</span><br>Fluid replete or tubular damage</td>
+            <td>Unreliable with diuretics; polyuria dilutes concentration</td>
+          </tr>
+          <tr>
+            <td>FENa</td>
+            <td>(U[Na⁺]×PCr) ÷ (P[Na⁺]×UCr) ×100</td>
+            <td><span class="val-low">&lt;1%</span><br>Prerenal / early AKI</td>
+            <td><span class="val-high">&gt;2%</span><br>Established renal AKI</td>
+            <td>Unreliable with diuretics; consider FEUrea instead</td>
+          </tr>
+          <tr>
+            <td>FEUrea</td>
+            <td>(U[Urea]×PCr) ÷ (P[Urea]×UCr) ×100</td>
+            <td><span class="val-low">&lt;40%</span><br>Prerenal / transient AKI</td>
+            <td><span class="val-high">&gt;40%</span><br>Established AKI</td>
+            <td>Human ICU data only; not validated in small animals</td>
+          </tr>
+          <tr>
+            <td>EFWC</td>
+            <td>Uvol × [1 − (U[Na⁺]+U[K⁺]) ÷ P[Na⁺]]</td>
+            <td><span class="val-low">Negative</span><br>Retaining free water</td>
+            <td><span class="val-high">Positive</span><br>Excreting free water</td>
+            <td>Glucosuria invalidates formula</td>
+          </tr>
+          <tr>
+            <td>FEK</td>
+            <td>(U[K⁺]×PCr) ÷ (P[K⁺]×UCr) ×100</td>
+            <td><span class="val-low">&lt;4–6%</span><br>Nonrenal K⁺ loss</td>
+            <td><span class="val-high">&gt;6%</span><br>Renal K⁺ wasting</td>
+            <td>Increases with AKI onset, decreases on recovery</td>
+          </tr>
+          <tr>
+            <td>TTKG</td>
+            <td>(U[K⁺]×P-Osm) ÷ (P[K⁺]×U-Osm)</td>
+            <td><span class="val-low">Hypokal &lt;3:</span> extrarenal<br><span class="val-low">Hyperkal &lt;7:</span> ↓ renal excretion</td>
+            <td><span class="val-high">Hypokal &gt;3:</span> renal loss<br><span class="val-high">Hyperkal &gt;7:</span> extrarenal</td>
+            <td>Requires U[Na⁺] &gt;25 AND Uosm ≥ Posm</td>
+          </tr>
+          <tr>
+            <td>UK:UCr</td>
+            <td>U[K⁺] ÷ UCr (mmol/L)</td>
+            <td><span class="val-low">Hypokal &lt;2.5:</span> nonrenal<br><span class="val-low">Hyperkal &lt;10:</span> inappropriate</td>
+            <td><span class="val-high">Hypokal &gt;2.5:</span> renal wasting<br><span class="val-high">Hyperkal &gt;20:</span> appropriate/extrarenal</td>
+            <td>Preferred over TTKG; no osmolality restrictions</td>
+          </tr>
+          <tr>
+            <td>UAG</td>
+            <td>U[Na⁺] + U[K⁺] − U[Cl⁻]</td>
+            <td><span class="val-low">Negative (−20 to −50)</span><br>Normal NH₄⁺ excretion; extrarenal cause</td>
+            <td><span class="val-high">Positive</span><br>↓ NH₄⁺; distal RTA or kidney disease</td>
+            <td>Invalid with ketonuria, bicarbonaturia, urinary ketones</td>
+          </tr>
+          <tr>
+            <td>U[Cl⁻]</td>
+            <td>Direct spot measurement</td>
+            <td><span class="val-low">&lt;25 mEq/L</span><br>Chloride-responsive alkalosis</td>
+            <td><span class="val-high">&gt;40 mEq/L</span><br>Chloride-resistant alkalosis</td>
+            <td>Evaluate in context of metabolic alkalosis</td>
+          </tr>
+          <tr>
+            <td>FEMg</td>
+            <td>100×(U[Mg²⁺]×PCr) ÷ (0.7×P[Mg²⁺]×UCr)</td>
+            <td><span class="val-low">&lt;2%</span><br>Extrarenal Mg²⁺ loss</td>
+            <td><span class="val-high">&gt;2–4%</span><br>Renal Mg²⁺ wasting</td>
+            <td>0.7 factor = % unbound Mg²⁺; uses total (not ionized) Mg</td>
+          </tr>
+          <tr>
+            <td>FECa</td>
+            <td>(U[Ca²⁺]×PCr) ÷ (P[Ca²⁺]×UCr) ×100</td>
+            <td colspan="2">Variable; used in calcium oxalate urolithiasis workup</td>
+            <td>Substantial overlap between affected and unaffected dogs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="keypoints" style="margin-top: 32px;">
+      <div class="kp-title">Clinics Care Points (from Chapter)</div>
+      <ul>
+        <li>Interpretation of urine electrolytes is most useful when assessing whether the kidney's response to an electrolyte or acid-base disturbance is appropriate</li>
+        <li>Spot measurements are practical but limited; fractional excretion indices can help account for urine concentration effects</li>
+        <li>Results should always be interpreted in the context of history, physical examination, concurrent medications, and other laboratory findings</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>Philp HS, Hopper K · Vet Clin Small Anim 56 (2026) 121–132 · doi: 10.1016/j.cvsm.2025.08.001</span>
+  <span>Study Guide · For Educational Use</span>
+</footer>
+
+</body>
+</html>
