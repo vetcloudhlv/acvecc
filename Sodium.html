@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sodium – Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --teal: #0891b2;
+    --teal-light: #cffafe;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --gray: #64748b;
+    --gray-light: #f1f5f9;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --bg: #f8fafc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────── */
+  .layout { display: flex; min-height: 100vh; }
+
+  nav {
+    width: 230px;
+    background: var(--navy);
+    color: #cbd5e1;
+    padding: 28px 0;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  nav .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: #fff;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 12px;
+  }
+  nav .logo span { color: #60a5fa; }
+
+  nav a {
+    display: block;
+    padding: 7px 20px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: all .2s;
+  }
+  nav a:hover, nav a.active {
+    color: #fff;
+    background: rgba(255,255,255,.06);
+    border-left-color: #60a5fa;
+  }
+  nav .section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #475569;
+    padding: 14px 20px 4px;
+  }
+
+  /* ── MAIN ────────────────────────────────── */
+  main {
+    margin-left: 230px;
+    padding: 40px 48px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  h1.page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .subtitle { color: var(--gray); font-size: 13px; margin-bottom: 36px; }
+
+  /* ── SECTIONS ─────────────────────────────── */
+  section { margin-bottom: 48px; }
+
+  h2.sec-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2.sec-title .icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--blue);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 18px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  /* ── CALLOUT BOXES ──────────────────────── */
+  .callout {
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    border-left: 4px solid;
+  }
+  .callout.blue   { background: var(--blue-light);   border-color: var(--blue);   }
+  .callout.teal   { background: var(--teal-light);   border-color: var(--teal);   }
+  .callout.amber  { background: var(--amber-light);  border-color: var(--amber);  }
+  .callout.red    { background: var(--red-light);    border-color: var(--red);    }
+  .callout.green  { background: var(--green-light);  border-color: var(--green);  }
+  .callout.purple { background: var(--purple-light); border-color: var(--purple); }
+
+  .callout .callout-title {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 6px;
+  }
+  .callout.blue   .callout-title { color: var(--blue);   }
+  .callout.teal   .callout-title { color: var(--teal);   }
+  .callout.amber  .callout-title { color: var(--amber);  }
+  .callout.red    .callout-title { color: var(--red);    }
+  .callout.green  .callout-title { color: var(--green);  }
+  .callout.purple .callout-title { color: var(--purple); }
+
+  /* ── TABLES ─────────────────────────────── */
+  .tbl-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+  tbody tr:nth-child(even) { background: var(--gray-light); }
+  tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:hover { background: var(--blue-light); }
+
+  /* ── PILL TAGS ───────────────────────────── */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px 2px 2px 0;
+  }
+  .tag.blue   { background: var(--blue-light);   color: var(--blue);   }
+  .tag.red    { background: var(--red-light);     color: var(--red);    }
+  .tag.green  { background: var(--green-light);   color: var(--green);  }
+  .tag.amber  { background: var(--amber-light);   color: var(--amber);  }
+  .tag.purple { background: var(--purple-light);  color: var(--purple); }
+
+  /* ── FORMULA BOX ─────────────────────────── */
+  .formula-box {
+    background: var(--navy);
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .formula-box .f-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #60a5fa;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* ── FLOWCHART ───────────────────────────── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin: 16px 0;
+  }
+
+  .flow-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 2px 0; }
+
+  .flow-box {
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1.5px solid;
+  }
+  .flow-box.navy   { background: var(--navy);        color: #fff;       border-color: var(--navy); }
+  .flow-box.blue   { background: var(--blue-light);  color: var(--blue); border-color: var(--blue); }
+  .flow-box.teal   { background: var(--teal-light);  color: var(--teal); border-color: var(--teal); }
+  .flow-box.amber  { background: var(--amber-light); color: var(--amber); border-color: var(--amber); }
+  .flow-box.red    { background: var(--red-light);   color: var(--red);  border-color: var(--red); }
+  .flow-box.green  { background: var(--green-light); color: var(--green); border-color: var(--green); }
+
+  .flow-arrow { font-size: 18px; color: var(--gray); }
+
+  /* ── TWO-COL GRID ─────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
+  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* ── BODY TEXT ───────────────────────────── */
+  p { margin: 6px 0; }
+  ul, ol { padding-left: 20px; margin: 6px 0; }
+  li { margin: 4px 0; }
+  strong { color: var(--navy); }
+  em { color: var(--teal); font-style: normal; font-weight: 500; }
+
+  /* ── KH NOTES ────────────────────────────── */
+  .kh-notes {
+    background: #fffbeb;
+    border: 1px dashed var(--amber);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 16px 0;
+  }
+  .kh-notes .kh-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .kh-notes li { font-size: 13px; }
+
+  /* ── OSMOLALITY COMPARISON ───────────────── */
+  .compare-cols { display: flex; gap: 16px; margin: 12px 0; }
+  .compare-col {
+    flex: 1;
+    border-radius: 8px;
+    padding: 14px;
+    border: 1.5px solid var(--border);
+  }
+  .compare-col .cc-title {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+
+  /* osmole chips */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .chip {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .chip.effective   { background: #dbeafe; color: #1d4ed8; }
+  .chip.ineffective { background: #f1f5f9; color: #64748b; }
+
+  /* ── SEPARATOR ───────────────────────────── */
+  hr.sep { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  /* ── TREATMENT CARD ──────────────────────── */
+  .tx-card {
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  .tx-card .tx-header {
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #fff;
+  }
+  .tx-card .tx-body { padding: 14px 16px; }
+  .tx-card.acute   .tx-header { background: var(--red); }
+  .tx-card.chronic .tx-header { background: var(--teal); }
+  .tx-card.special .tx-header { background: var(--purple); }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- ── SIDEBAR ─────────────────────────────── -->
+<nav>
+  <div class="logo">🧪 <span>Na⁺</span> Study Guide</div>
+  <div class="section-label">Basics</div>
+  <a href="#intro">Introduction</a>
+  <a href="#definitions">Definitions</a>
+  <a href="#osmoles">Osmoles</a>
+  <a href="#osmoregulation">Osmoregulation</a>
+  <div class="section-label">Disorders</div>
+  <a href="#hyponatremia">Hyponatremia</a>
+  <a href="#hypernatremia">Hypernatremia</a>
+  <div class="section-label">Labs</div>
+  <a href="#urine">Urine Osmolality</a>
+  <a href="#formulas">Formulas</a>
+</nav>
+
+<!-- ── MAIN ───────────────────────────────── -->
+<main>
+  <h1 class="page-title">Sodium</h1>
+  <p class="subtitle">Veterinary Internal Medicine · Electrolytes &amp; Fluid Balance</p>
+
+  <!-- ════════════════════════════════════════
+       INTRODUCTION
+  ═══════════════════════════════════════════ -->
+  <section id="intro">
+    <h2 class="sec-title"><span class="icon">💧</span>Introduction & Body Fluid Compartments</h2>
+
+    <div class="grid-2">
+      <div class="callout blue">
+        <div class="callout-title">Reference Values – Na⁺</div>
+        <ul>
+          <li><strong>Extracellular:</strong> 140 mEq/L</li>
+          <li><strong>Intracellular:</strong> 5 mEq/L</li>
+        </ul>
+      </div>
+      <div class="callout teal">
+        <div class="callout-title">Normal Osmolality</div>
+        <ul>
+          <li><strong>Dogs:</strong> 290–310 mOsm/kg</li>
+          <li><strong>Cats:</strong> 290–330 mOsm/kg</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Body Water Compartments Flowchart -->
+    <h3>Body Water Distribution</h3>
+    <div style="border:1.5px solid var(--border); border-radius:10px; padding:20px; background:#fff; margin:12px 0;">
+      <div style="text-align:center; font-weight:700; margin-bottom:16px; color:var(--navy);">Total Body Water = 60% Body Weight</div>
+      <div style="display:flex; gap:20px; align-items:stretch; flex-wrap:wrap;">
+        <div style="flex:2; border:2px solid var(--blue); border-radius:8px; padding:14px; background:var(--blue-light);">
+          <div style="font-weight:700; color:var(--blue); margin-bottom:8px;">ICF (Intracellular) — <span style="font-size:18px;">2/3</span> TBW</div>
+          <div style="font-size:12px; color:var(--gray);">High K⁺, low Na⁺</div>
+        </div>
+        <div style="flex:3; border:2px solid var(--teal); border-radius:8px; padding:14px; background:var(--teal-light);">
+          <div style="font-weight:700; color:var(--teal); margin-bottom:8px;">ECF (Extracellular) — <span style="font-size:18px;">1/3</span> TBW</div>
+          <div style="display:flex; gap:10px; margin-top:8px;">
+            <div style="flex:3; background:#fff; border-radius:6px; padding:8px; border:1px solid var(--teal);">
+              <div style="font-weight:600; font-size:12px;">Interstitial</div>
+              <div style="font-size:20px; font-weight:700; color:var(--teal);">75%</div>
+              <div style="font-size:11px; color:var(--gray);">of ECF</div>
+            </div>
+            <div style="flex:1; background:#fff; border-radius:6px; padding:8px; border:1px solid var(--blue);">
+              <div style="font-weight:600; font-size:12px;">Intravascular</div>
+              <div style="font-size:20px; font-weight:700; color:var(--blue);">25%</div>
+              <div style="font-size:11px; color:var(--gray);">of ECF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DEFINITIONS
+  ═══════════════════════════════════════════ -->
+  <section id="definitions">
+    <h2 class="sec-title"><span class="icon">📖</span>Definitions</h2>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Term</th><th>Definition</th><th>Units</th><th>Key Note</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Osmolality</strong></td>
+            <td>Number of osmoles per <em>mass</em> of solvent</td>
+            <td>mOsm/kg</td>
+            <td>Depends on temperature &amp; pressure of solvent</td>
+          </tr>
+          <tr>
+            <td><strong>Osmolarity</strong></td>
+            <td>Number of osmoles per <em>volume</em> of solvent</td>
+            <td>mOsm/L</td>
+            <td>Independent of temperature/pressure</td>
+          </tr>
+          <tr>
+            <td><strong>Osmole</strong></td>
+            <td>1 mole of any fully dissociated substance dissolved in water</td>
+            <td>—</td>
+            <td>Measured by freezing point depression osmometry</td>
+          </tr>
+          <tr>
+            <td><strong>Tonicity</strong></td>
+            <td>Osmotic pressure between two compartments; based on <em>effective</em> osmoles</td>
+            <td>—</td>
+            <td>Na⁺ is main determinant; glucose &lt;10 mOsm/kg normally</td>
+          </tr>
+          <tr>
+            <td><strong>Reflection coefficient (σ)</strong></td>
+            <td>Measure of membrane permeability to a solute</td>
+            <td>0–1</td>
+            <td>σ=0 fully permeable; σ=1 fully selective. BBB: high. Hepatic sinusoids: low</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout amber">
+      <div class="callout-title">⚠️ Key Rule</div>
+      Hypernatremia = hypertonicity BUT <strong>hyponatremia ≠ necessarily hypotonicity</strong>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       OSMOLES
+  ═══════════════════════════════════════════ -->
+  <section id="osmoles">
+    <h2 class="sec-title"><span class="icon">⚗️</span>Osmoles & Osmole Gap</h2>
+
+    <div class="grid-2">
+      <div>
+        <h3>Effective Osmoles</h3>
+        <p style="font-size:12px; color:var(--gray); margin-bottom:8px;">Cannot freely cross cell membrane → exert osmotic pressure → determine tonicity</p>
+        <div class="chip-row">
+          <span class="chip effective">Na⁺</span>
+          <span class="chip effective">K⁺</span>
+          <span class="chip effective">Glucose</span>
+        </div>
+      </div>
+      <div>
+        <h3>Ineffective Osmoles</h3>
+        <p style="font-size:12px; color:var(--gray); margin-bottom:8px;">Freely cross cell membrane → no osmotic pressure</p>
+        <div class="chip-row">
+          <span class="chip ineffective">BUN</span>
+          <span class="chip ineffective">Ethylene glycol</span>
+          <span class="chip ineffective">Ethanol</span>
+          <span class="chip ineffective">Methanol</span>
+          <span class="chip ineffective">Aspirin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      <div class="callout-title">🔴 Osmole Gap</div>
+      Measured osmolality should NOT exceed calculated by <strong>&gt;10 mOsm/kg</strong>. If it does → unmeasured solute present (mannitol, ethylene glycol) or pseudohyponatraemia (hyperproteinaemia / hyperlipidaemia)
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       OSMOREGULATION
+  ═══════════════════════════════════════════ -->
+  <section id="osmoregulation">
+    <h2 class="sec-title"><span class="icon">🧠</span>Osmoregulation</h2>
+    <p style="margin-bottom:12px;">Two major mechanisms controlling plasma osmolality (changes &lt;1%):</p>
+
+    <!-- ADH -->
+    <h3>1. ADH (Antidiuretic Hormone)</h3>
+
+    <div class="callout blue">
+      <div class="callout-title">Stimuli for ADH Release</div>
+      <ul>
+        <li><strong>A) Increasing plasma osmolality</strong> — osmoreceptors in hypothalamus</li>
+        <li><strong>B) Reduced effective circulating volume (ECV)</strong> — baroreceptors <span class="tag amber">More Potent</span></li>
+      </ul>
+    </div>
+
+    <!-- ADH Mechanism Flow -->
+    <h3>ADH Mechanism</h3>
+    <div style="background:#fff; border:1.5px solid var(--border); border-radius:10px; padding:16px; margin:12px 0;">
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box navy">ADH released</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box blue">Binds V2 receptor on basolateral membrane of collecting tubule</div>
+        </div>
+        <div style="margin-left:20px; color:var(--gray); font-size:18px;">↓</div>
+        <div class="flow-row">
+          <div class="flow-box teal">AQ2 channels inserted into luminal membrane of collecting duct</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box green">Water reabsorbed into tubular cell</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; border-top:1px dashed var(--border); padding-top:10px;">
+        <strong>Other ADH Effects:</strong>
+        <ul style="margin-top:6px; font-size:13px;">
+          <li>↑ Na reabsorption &amp; K⁺ excretion in collecting ducts</li>
+          <li>↑ Cl reabsorption in loop of Henle</li>
+          <li>↑ Urea reabsorption in inner medullary collecting duct</li>
+          <li>Release of vWF from Weibel-Palade bodies</li>
+        </ul>
+        <div style="margin-top:8px;"><strong>Other stimuli:</strong> Nausea, pain/stress, hypoglycaemia, opioids</div>
+      </div>
+    </div>
+
+    <h3>2. Thirst</h3>
+    <p>Acts as a complementary mechanism to ADH in maintaining osmolality.</p>
+
+    <!-- Osmoregulation vs Volume Regulation Table -->
+    <h3>Osmoregulation vs. Volume Regulation</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Aspect</th><th>Osmoregulation</th><th>Volume Regulation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Regulated Parameter</strong></td><td>Solute concentration (osmolarity); ratio of solutes e.g. Na with H₂O</td><td>Fluid volume ECV; absolute quantity of Na &amp; H₂O</td></tr>
+          <tr><td><strong>Mediated by</strong></td><td>Osmoreceptor in hypothalamus</td><td>Baroreceptors</td></tr>
+          <tr><td><strong>Main Trigger</strong></td><td>Changes in osmolarity</td><td>Changes in blood pressure or volume</td></tr>
+          <tr><td><strong>Primary Hormones</strong></td><td>ADH</td><td>Aldosterone, RAAS, natriuretic peptides</td></tr>
+          <tr><td><strong>Outcome</strong></td><td>Prevents cell swelling/shrinking</td><td>Maintains blood pressure and perfusion</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Effectors of Sodium Balance Table -->
+    <h3>Effectors of Sodium Balance (Table 3-3)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Effector</th><th>Stimuli for Release</th><th>Inhibitors of Release</th><th>Major Effects</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Aldosterone</strong></td>
+            <td>Angiotensin II, hypokalaemia, adrenocorticotropic hormone</td>
+            <td>Dopamine, ANP</td>
+            <td>↑ Number and activity of luminal Na⁺ channels and basolateral Na⁺/K⁺ ATPase in principal cells of cortical collecting ducts</td>
+          </tr>
+          <tr>
+            <td><strong>Angiotensin II</strong></td>
+            <td>↓ Renal perfusion pressure</td>
+            <td>↑ Renal perfusion pressure</td>
+            <td>Systemic/afferent vasoconstriction; glomerular arteriolar vasoconstriction (efferent &gt; afferent); stimulates proximal Na⁺ reabsorption; stimulates aldosterone secretion</td>
+          </tr>
+          <tr>
+            <td><strong>Atrial natriuretic peptide (ANP)</strong></td>
+            <td>↑ Atrial stretch</td>
+            <td>↓ Atrial stretch</td>
+            <td>Inhibits Na⁺ reabsorption in parts of collecting duct; directly increases glomerular filtration rate</td>
+          </tr>
+          <tr>
+            <td><strong>Catecholamines</strong></td>
+            <td>↓ Effective circulating volume</td>
+            <td>↑ Effective circulating volume</td>
+            <td>Vasoconstriction; glomerular arteriolar vasoconstriction (efferent &gt; afferent); ↑ proximal tubular Na⁺ reabsorption (α effect); ↑ renin release (β effect)</td>
+          </tr>
+          <tr>
+            <td><strong>Renin</strong></td>
+            <td>↓ Perfusion pressure in juxtaglomerular apparatus; sympathetic nervous system; ↓ Cl delivery to macula densa</td>
+            <td>Angiotensin II, ANP; antidiuretic hormone</td>
+            <td>Not an "effector"—an enzyme that converts angiotensinogen to angiotensin I</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ════════════════════════════════════════
+       HYPONATREMIA
+  ═══════════════════════════════════════════ -->
+  <section id="hyponatremia">
+    <h2 class="sec-title"><span class="icon">🔵</span>Hyponatremia</h2>
+
+    <div class="callout blue">
+      <div class="callout-title">Core Mechanism</div>
+      Almost always = <strong>free water retention in excess of sodium retention</strong> ± concurrent sodium loss
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">Prevalence</div>
+      Most common electrolyte disorder: <strong>26% Dogs · 50% Cats</strong>
+    </div>
+
+    <!-- Classification Flowchart -->
+    <h3>Classification by Tonicity → Volume Status</h3>
+    <div style="background:#fff; border:1.5px solid var(--border); border-radius:10px; padding:20px; margin:12px 0;">
+
+      <!-- Tonicity -->
+      <div style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
+        <div style="flex:1; background:var(--blue-light); border:2px solid var(--blue); border-radius:8px; padding:12px;">
+          <div style="font-weight:700; color:var(--blue); margin-bottom:4px;">1. Hypotonic <span class="tag blue">MOST COMMON</span></div>
+          <div style="font-size:12px;">→ Water balance impairment | Treat with fluid within 10 mEq/L of patient's Na⁺</div>
+        </div>
+        <div style="flex:1; background:var(--gray-light); border:2px solid var(--gray); border-radius:8px; padding:12px;">
+          <div style="font-weight:700; color:var(--gray); margin-bottom:4px;">2. Isotonic (Pseudohyponatremia)</div>
+          <div style="font-size:12px;">Artifact (flame photometry) | Hyperlipidaemia, Hyperproteinaemia</div>
+        </div>
+        <div style="flex:1; background:var(--amber-light); border:2px solid var(--amber); border-radius:8px; padding:12px;">
+          <div style="font-weight:700; color:var(--amber); margin-bottom:4px;">3. Hypertonic (Dilutional)</div>
+          <div style="font-size:12px;">Exogenous osmoles ↑ tonicity → dilutional ↓ Na | Hyperglycaemia, Mannitol</div>
+        </div>
+      </div>
+
+      <!-- Volume subclassification -->
+      <div style="border-top:2px solid var(--border); padding-top:14px;">
+        <div style="font-weight:700; margin-bottom:10px; font-size:13px; color:var(--navy);">Hypotonic Hyponatremia — Subclassified by Volume Status:</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; flex-wrap:wrap;">
+
+          <!-- Hypovolemic -->
+          <div style="border-radius:8px; border:1.5px solid var(--red); overflow:hidden;">
+            <div style="background:var(--red); color:#fff; padding:8px 12px; font-weight:700; font-size:12px;">HYPOVOLEMIC</div>
+            <div style="padding:10px 12px; font-size:12px; background:#fff;">
+              <p style="margin-bottom:6px;"><em>Mechanism:</em> ↓ ECV → non-osmotic ADH (baroreceptors)</p>
+              <div style="margin:6px 0; font-weight:600; font-size:11px;">UNa &lt;30, UOsm &gt;200:</div>
+              <ul style="font-size:12px;">
+                <li>GI loss</li><li>Third space</li><li>Cutaneous loss</li>
+              </ul>
+              <div style="margin:6px 0; font-weight:600; font-size:11px;">UNa &gt;30, UOsm &gt;200:</div>
+              <ul style="font-size:12px;">
+                <li>Hypoadrenocorticism</li>
+                <li>Loop diuretics</li>
+                <li>Cerebral salt wasting</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Euvolemic -->
+          <div style="border-radius:8px; border:1.5px solid var(--blue); overflow:hidden;">
+            <div style="background:var(--blue); color:#fff; padding:8px 12px; font-weight:700; font-size:12px;">EUVOLEMIC</div>
+            <div style="padding:10px 12px; font-size:12px; background:#fff;">
+              <p style="margin-bottom:6px;"><em>Mechanism:</em> Inappropriate ADH / impaired water excretion</p>
+              <div style="margin:6px 0; font-weight:600; font-size:11px; color:var(--green);">Tx: Stop water; give furosemide</div>
+              <div style="margin:6px 0; font-weight:600; font-size:11px;">UNa &lt;30, UOsm ≤200:</div>
+              <ul style="font-size:12px;"><li>Psychogenic polydipsia</li><li>Hypotonic fluid infusion</li></ul>
+              <div style="margin:6px 0; font-weight:600; font-size:11px;">UNa &gt;30, UOsm &gt;200:</div>
+              <ul style="font-size:12px;">
+                <li>SIADH (intracranial/pulmonary disease, drugs, seizures, tumours)</li>
+                <li>Hypothyroidism</li><li>Thiazide diuretics</li><li>Potassium depletion</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Hypervolemic -->
+          <div style="border-radius:8px; border:1.5px solid var(--teal); overflow:hidden;">
+            <div style="background:var(--teal); color:#fff; padding:8px 12px; font-weight:700; font-size:12px;">HYPERVOLEMIC</div>
+            <div style="padding:10px 12px; font-size:12px; background:#fff;">
+              <p style="margin-bottom:6px;"><em>Mechanism:</em> ↑ TBW but inadequate water excretion or ↓ ECV</p>
+              <div style="margin:6px 0; font-weight:600; font-size:11px;">UNa &lt;30, UOsm &gt;200:</div>
+              <ul style="font-size:12px;"><li>Heart failure (untreated)</li><li>Cirrhosis</li></ul>
+              <div style="margin:6px 0; font-weight:600; font-size:11px;">UNa &gt;30, UOsm &gt;200:</div>
+              <ul style="font-size:12px;"><li>Kidney failure (AKI)</li><li>Nephrotic Syndrome</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glucose correction -->
+    <div class="callout amber">
+      <div class="callout-title">Hypertonic Hyponatremia — Glucose Correction</div>
+      <ul>
+        <li>Glucose &lt;400 mg/dL → Na⁺ decreases <strong>1.6 mEq/L</strong> per 100 mg/dL glucose rise</li>
+        <li>Glucose &gt;400 mg/dL → Na⁺ decreases <strong>2.4 mEq/L</strong> per 100 mg/dL glucose rise</li>
+      </ul>
+    </div>
+
+    <!-- Clinical Features -->
+    <h3>Clinical Features</h3>
+    <div class="grid-2">
+      <div class="callout red">
+        <div class="callout-title">Acute</div>
+        Cerebral oedema from hypo-osmolality: nausea, lethargy, seizures, coma
+      </div>
+      <div class="callout blue">
+        <div class="callout-title">Chronic</div>
+        Milder symptoms due to osmotic adaptation (loss of K⁺, Na⁺, organic solutes: myoinositol, amino acids)
+      </div>
+    </div>
+
+    <!-- Treatment -->
+    <h3>Treatment</h3>
+    <div class="tx-card acute">
+      <div class="tx-header">🔴 Severe (&lt;125 mEq/L or &lt;15 mEq from reference)</div>
+      <div class="tx-body">
+        <ul>
+          <li>1–2 mL/kg of 3% hypertonic saline changes Na⁺ by ~1 mEq/L</li>
+          <li>Limit rise to <strong>10 mEq/L first 24h</strong> and <strong>18 mEq/L first 48h</strong></li>
+          <li>Hypovolaemic: treat with hypertonic fluid within <strong>10 mEq/L of patient's Na⁺</strong> until euvolaemic → remove ADH stimulus</li>
+          <li>Hypertonic (glucose-driven): remove the osmotic substance → resolves hyponatraemia</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tx-card chronic">
+      <div class="tx-header">🟢 Chronic / Asymptomatic</div>
+      <div class="tx-body">
+        <ul>
+          <li>Slow correction to avoid <strong>osmotic demyelination syndrome</strong></li>
+          <li>Mild ≥130 mmol/L: often self-corrects by treating underlying disease</li>
+          <li>Monitor serum Na⁺ frequently</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Osmotic Demyelination -->
+    <div class="callout red">
+      <div class="callout-title">⚠️ Osmotic Demyelination Syndrome</div>
+      Risk with rapid correction of <em>chronic</em> hyponatraemia → damage to myelin &amp; oligodendrocytes → pons, thalamus, cerebrum, cerebellum affected.
+      Signs: abnormal mentation, paralysis (2–7 days after change in Na⁺)
+    </div>
+
+    <div class="kh-notes">
+      <div class="kh-title">📝 KH Notes — Hyponatremia</div>
+      <ul>
+        <li>Hyponatremia vs hypernatremia: strong association with outcome — <em>not causality</em></li>
+        <li>K⁺ depends on distal renal flow; if prolonged ↓ GFR, UNa not accurate</li>
+        <li>Always abnormal if patient is hyponatraemic, thirsty, and drinking — suggests low ECV</li>
+        <li>Tolvaptan: helps treat hyponatraemia — very expensive</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ════════════════════════════════════════
+       HYPERNATREMIA
+  ═══════════════════════════════════════════ -->
+  <section id="hypernatremia">
+    <h2 class="sec-title"><span class="icon">🔴</span>Hypernatremia</h2>
+
+    <div class="callout amber">
+      <div class="callout-title">Core Mechanism</div>
+      ↑ ECF tonicity → water moves <strong>OUT of cells</strong> (neurons least tolerant) → cell shrinkage<br>
+      Less common than hyponatraemia — intense thirst is normally protective
+    </div>
+
+    <!-- Classification -->
+    <h3>Classification by Volume Status</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:12px 0; flex-wrap:wrap;">
+
+      <div style="border-radius:8px; border:1.5px solid var(--teal); overflow:hidden;">
+        <div style="background:var(--teal); color:#fff; padding:8px 12px; font-weight:700; font-size:12px;">NORMOVOLEMIA — Pure Water Loss</div>
+        <div style="padding:10px 12px; font-size:12px; background:#fff;">
+          <div style="font-weight:600; margin-bottom:4px;">Measure urine FE<sub>Na</sub> / solute clearance</div>
+          <ul>
+            <li>Renal: Diabetes insipidus (Central / Nephrogenic)</li>
+            <li>Extrarenal: Inadequate water access, hypodipsia</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-radius:8px; border:1.5px solid var(--red); overflow:hidden;">
+        <div style="background:var(--red); color:#fff; padding:8px 12px; font-weight:700; font-size:12px;">HYPOVOLEMIA — Hypotonic Fluid Loss</div>
+        <div style="padding:10px 12px; font-size:12px; background:#fff;">
+          <div style="font-weight:600; margin-bottom:4px;">Measure urine free water clearance</div>
+          <ul>
+            <li>Renal: Chronic kidney failure, non-oliguric AKI, osmotic/chemical diuresis</li>
+            <li>GI loss, diarrhoea, vomiting, third space loss</li>
+            <li>Fever, hyperventilation, cutaneous fluid loss</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-radius:8px; border:1.5px solid var(--amber); overflow:hidden;">
+        <div style="background:var(--amber); color:#fff; padding:8px 12px; font-weight:700; font-size:12px;">HYPERVOLEMIA — Sodium Gain</div>
+        <div style="padding:10px 12px; font-size:12px; background:#fff;">
+          <ul>
+            <li>Salt poisoning</li>
+            <li>Hypertonic saline</li>
+            <li>Sodium bicarbonate</li>
+            <li>Hyperaldosteronism</li>
+            <li>Hyperadrenocorticism</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clinical Features -->
+    <h3>Clinical Features</h3>
+    <div class="callout red">
+      <div class="callout-title">Neurological Signs (severity ≥180 mmol/L = severe)</div>
+      Lethargy, weakness, seizures, coma — due to cerebral dehydration.
+      Focal intracerebral &amp; subarachnoid haemorrhages or demyelination possible.
+      Chronic cases may show fewer symptoms due to osmotic adaptation.
+    </div>
+
+    <!-- Adaptations -->
+    <h3>Physiological Adaptation to Hypernatremia</h3>
+    <div style="background:#fff; border:1.5px solid var(--border); border-radius:10px; padding:16px; margin:12px 0;">
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div style="flex:1; border-left:3px solid var(--blue); padding-left:12px;">
+          <div style="font-weight:700; color:var(--blue); margin-bottom:4px;">Mins–Hours: CSF Compensation</div>
+          <ul style="font-size:13px;">
+            <li>Lowered interstitial hydraulic pressure draws CSF into brain interstitium</li>
+            <li>Brain cells increase uptake of Na &amp; K from CSF → ↑ neuronal osmolality → water back into cells</li>
+          </ul>
+        </div>
+        <div style="flex:1; border-left:3px solid var(--purple); padding-left:12px;">
+          <div style="font-weight:700; color:var(--purple); margin-bottom:4px;">Within 24h: Idiogenic Osmoles</div>
+          <div class="chip-row">
+            <span class="chip effective">Taurine</span>
+            <span class="chip effective">Glutamine</span>
+            <span class="chip effective">Glutamate</span>
+            <span class="chip effective">Glycine</span>
+            <span class="chip effective">Inositol</span>
+            <span class="chip effective">Myoinositol</span>
+            <span class="chip effective">Phosphocreatine</span>
+            <span class="chip effective">Sorbitol</span>
+          </div>
+          <p style="font-size:12px; margin-top:6px;">Form within neurons → ↑ intracellular osmolality → draw water back in. Full compensation: 2–7 days</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Treatment -->
+    <h3>Treatment</h3>
+
+    <div class="tx-card acute">
+      <div class="tx-header">🔴 Acute (&lt;48 hours) — Rapid Correction</div>
+      <div class="tx-body">
+        <ul>
+          <li>5% dextrose 3–6 mL/kg/hr OR 0.45% NaCl</li>
+          <li>Target: <strong>1–2 mEq/L/hr</strong> within 24 hrs</li>
+          <li>If clinical signs: 5% dextrose at 7–10 mL/kg/h</li>
+          <li>Alternative hypotonic: up to 2–3 mEq/L/h for initial 2–3 hours</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tx-card chronic">
+      <div class="tx-header">🟢 Chronic (&gt;48 hours) — Slow Correction</div>
+      <div class="tx-body">
+        <ul>
+          <li>Max safe correction: <strong>&lt;0.5 mEq/L/hr</strong></li>
+          <li>In absence of clinical signs: <strong>10 mEq/L/day (24h)</strong> and <strong>18 mEq/L (48h)</strong></li>
+          <li>Avoid over-slow correction: &lt;0.25 mEq/L/hr also dangerous</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tx-card special">
+      <div class="tx-header">🟣 Specific Conditions</div>
+      <div class="tx-body">
+        <ul>
+          <li><strong>Post-op / overcorrection for hyponatremia:</strong> Give DDAVP ± free water</li>
+          <li><strong>Central DI:</strong> DDAVP 1 drop (1.5–4 µL) conjunctival sac q8–12h, alternate eyes</li>
+          <li><strong>Nephrogenic DI:</strong> Treat underlying cause; consider thiazides, NSAIDs, low Na⁺ diet</li>
+          <li><strong>Sodium overload:</strong> Remove excess Na⁺; diuretics + hypotonic fluid replacement (e.g. D5W)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Overcorrection warning -->
+    <div class="callout red">
+      <div class="callout-title">⚠️ If Hypernatremia Corrected Too Fast → Cerebral Oedema</div>
+      Signs: obtundation, head pressing, coma, seizures<br>
+      1. Stop free water infusion; measure plasma Na⁺<br>
+      2. Mannitol 0.5–1 g/kg slow IV → if no improvement: 3–5 mL/kg hypertonic (7.2%) saline slow IV<br>
+      <em>*Rapid hypertonic saline can cause vasodilation</em>
+    </div>
+
+    <!-- Rapid correction consequences -->
+    <div style="background:#fff; border:1.5px solid var(--border); border-radius:10px; padding:16px; margin:12px 0;">
+      <div style="font-weight:700; margin-bottom:12px; color:var(--navy);">Rapid Correction Consequences</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="flex:1; text-align:center; padding:12px; background:var(--red-light); border-radius:8px; border:1.5px solid var(--red);">
+          <div style="font-size:11px; font-weight:700; color:var(--red); text-transform:uppercase; margin-bottom:4px;">Rapid Onset Acute Hypernatremia OR Rapid Correction of Chronic Hyponatremia</div>
+          <div style="font-size:14px; font-weight:700; margin:8px 0;">↑ Plasma [Na⁺] rapidly</div>
+          <div style="background:var(--red); color:#fff; border-radius:6px; padding:8px; font-weight:700; font-size:12px;">OSMOTIC DEMYELINATION + Intracranial Hemorrhage</div>
+        </div>
+        <div style="flex:1; text-align:center; padding:12px; background:var(--blue-light); border-radius:8px; border:1.5px solid var(--blue);">
+          <div style="font-size:11px; font-weight:700; color:var(--blue); text-transform:uppercase; margin-bottom:4px;">Rapid Onset Acute Hyponatremia OR Rapid Correction of Chronic Hypernatremia</div>
+          <div style="font-size:14px; font-weight:700; margin:8px 0;">↓ Plasma [Na⁺] rapidly</div>
+          <div style="background:var(--blue); color:#fff; border-radius:6px; padding:8px; font-weight:700; font-size:12px;">CEREBRAL OEDEMA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ════════════════════════════════════════
+       URINE OSMOLALITY
+  ═══════════════════════════════════════════ -->
+  <section id="urine">
+    <h2 class="sec-title"><span class="icon">🧪</span>Urine Osmolality</h2>
+
+    <div class="grid-2">
+      <div>
+        <h3>Estimation from USG</h3>
+        <div class="formula-box">
+          <div class="f-label">Quick Estimate</div>
+          UOsm ≈ Last two digits of USG × 28–30
+        </div>
+        <div class="callout teal">
+          <div class="callout-title">Normal UOsm Ranges</div>
+          <ul>
+            <li><strong>Dogs:</strong> 800–2500 mOsm/kg</li>
+            <li><strong>Cats:</strong> 600–3000 mOsm/kg</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3>Isosthenuria</h3>
+        <div class="callout blue">
+          <div class="callout-title">Plasma osmolality ≈ 300 mOsm/kg = USG ≈ 1.010</div>
+          Isosthenuria range: USG 1.007–1.012<br>
+          Kidney unable to concentrate or dilute → urine excreted at plasma osmolality
+        </div>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <div class="callout-title">⚠️ Caveat</div>
+      Large molecular weight substances (glucose, proteins, radioiodine contrast) will increase USG and <strong>overestimate</strong> osmolality.
+      Use osmometer for accurate measurement.
+    </div>
+
+    <h3>Clinical Significance</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Finding</th><th>Interpretation</th></tr></thead>
+        <tbody>
+          <tr><td>UOsm &gt;1200 mOsm/kg, USG &gt;1.035</td><td>Adequate renal concentrating function</td></tr>
+          <tr><td>UOsm determines ADH activity</td><td>Differentiates prerenal from renal azotaemia</td></tr>
+          <tr><td>Low UOsm (hypotonic)</td><td>PUPD (DM, HAC), medullary washout, steroids, diuretics</td></tr>
+          <tr><td>UOsm + urine [Na⁺]</td><td>Diagnosis of SIADH</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Spot Check Formula (Formula 6)</h3>
+    <div class="formula-box">
+      <div class="f-label">Electrolyte Ratio Interpretation</div>
+      (UNa + UK) / Serum Na<br><br>
+      = 120/120 → Isotonic loss<br>
+      = 160/120 → Losing hypertonic solution (with ADH secretion)<br>
+      = 60/120 → 0.5 Hypotonic loss
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- ════════════════════════════════════════
+       FORMULAS
+  ═══════════════════════════════════════════ -->
+  <section id="formulas">
+    <h2 class="sec-title"><span class="icon">🔢</span>Key Formulas</h2>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 1 — Calculated Osmolality</div>
+      P<sub>osm</sub> (mOsm/kg) = 2[Na⁺] + [Glucose]/18 + [BUN]/2.8
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 2 — Calculated Effective P<sub>osm</sub> / Tonicity</div>
+      P<sub>osm</sub> effective (mOsm/kg) = 2[Na⁺] + [Glucose]/18
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 3 — Osmol Gap</div>
+      Osmol gap (mOsm/kg) = Measured P<sub>osm</sub> − Calculated P<sub>osm</sub>
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 4 — Na Deficit</div>
+      Na deficit (mEq) = 0.6 × BW (kg) × ([Na⁺] normal − [Na⁺] patient)
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 5 — Change [Na⁺] / 1L Infusate</div>
+      Δ[Na⁺] (mEq) = ([Na⁺] infusate + [K⁺] infusate − [Na⁺] patient) / (0.6 × BW(kg) + 1)
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 6 — Electrolyte-free Water Clearance</div>
+      V<sub>urine</sub> (mL) × (1 − ([Na⁺] urine + [K⁺] urine) / [Na⁺] serum)
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Formula 7 — Water Deficit</div>
+      Water deficit (L) = 0.6 × BW (kg) × ([Na⁺] patient / [Na⁺] normal − 1)
+    </div>
+
+    <div style="margin-top:12px; padding:10px 14px; background:var(--gray-light); border-radius:6px; font-size:12px; color:var(--gray);">
+      <strong>Units:</strong> [Na⁺], [K⁺] in mEq/L; [Glucose] in mg/dL; [BUN] in mg/dL; BW in kg; [K⁺] = potassium; [Na⁺] = sodium; P<sub>osm</sub> = plasma osmolality; V<sub>urine</sub> = volume of urine
+    </div>
+  </section>
+
+  <div style="text-align:center; color:var(--gray); font-size:11px; margin-top:48px; padding-top:20px; border-top:1px solid var(--border);">
+    Sodium Study Guide · Veterinary Internal Medicine · KH Notes Adapted
+  </div>
+</main>
+</div>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
